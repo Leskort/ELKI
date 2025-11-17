@@ -2,6 +2,17 @@ import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { requireAdmin } from '@/lib/auth'
 import { categorySchema } from '@/lib/validations/category'
+import { staticCategories, staticProducts } from '@/lib/data/static-data'
+
+// Проверка доступности базы данных
+async function isDatabaseAvailable(): Promise<boolean> {
+  try {
+    await prisma.$queryRaw`SELECT 1`
+    return true
+  } catch {
+    return false
+  }
+}
 
 // GET - получить категорию по ID
 export async function GET(
@@ -9,8 +20,34 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
-    const category = await prisma.category.findUnique({
-      where: { id: params.id },
+    // Проверяем доступность базы данных
+    const dbAvailable = await isDatabaseAvailable()
+    
+    if (!dbAvailable) {
+      // Используем статические данные
+      const category = staticCategories.find(c => c.id === params.id || c.slug === params.id)
+      if (!category) {
+        return NextResponse.json(
+          { error: 'Категория не найдена' },
+          { status: 404 }
+        )
+      }
+      // Добавляем продукты из статических данных
+      const products = staticProducts.filter(p => p.categoryId === category.id)
+      return NextResponse.json({
+        ...category,
+        products,
+      })
+    }
+
+    // Используем базу данных
+    const category = await prisma.category.findFirst({
+      where: {
+        OR: [
+          { id: params.id },
+          { slug: params.id }
+        ]
+      },
       include: {
         parent: true,
         children: true,
@@ -28,6 +65,15 @@ export async function GET(
     return NextResponse.json(category)
   } catch (error) {
     console.error('Error fetching category:', error)
+    // В случае ошибки пытаемся найти в статических данных
+    const category = staticCategories.find(c => c.id === params.id || c.slug === params.id)
+    if (category) {
+      const products = staticProducts.filter(p => p.categoryId === category.id)
+      return NextResponse.json({
+        ...category,
+        products,
+      })
+    }
     return NextResponse.json(
       { error: 'Ошибка при получении категории' },
       { status: 500 }
