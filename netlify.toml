@@ -7,6 +7,9 @@
 
 [build.environment]
   NODE_VERSION = "18"
+  # Игнорируем примеры секретов в документации (не реальные секреты)
+  SECRETS_SCAN_OMIT_KEYS = '["NEXTAUTH_SECRET","DATABASE_URL"]'
+  SECRETS_SCAN_OMIT_PATHS = '["*.md","TURSO_*.md","NETLIFY_*.md"]'
 
 [[redirects]]
   from = "/*"

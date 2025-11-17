@@ -91,7 +91,7 @@ export const authOptions: NextAuthOptions = {
       return session
     },
   },
-  secret: process.env.NEXTAUTH_SECRET || 'fallback-secret-key-for-development-only-change-in-production',
+      secret: process.env.NEXTAUTH_SECRET || 'dev-secret-not-for-production',
   debug: process.env.NODE_ENV === 'development',
 }
 
