@@ -21,7 +21,7 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
           hover && 'hover:horror-glow transition-all duration-300',
           className
         )}
-        {...props}
+        {...(props as any)}
       >
         {children}
       </motion.div>
