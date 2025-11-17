@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -38,11 +38,10 @@ model Product {
   description String?
   price       Float
   image       String?
-  images      String?   @default("[]") // JSON строка для хранения массива URL изображений
+  images      String?   @default("[]")
   inStock     Boolean   @default(true)
   categoryId  String
   category    Category  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
 }
-

@@ -162,13 +162,13 @@ export default function AdminPage() {
             <h3 className="text-lg text-horror-glow mb-2 font-bold">Как начать работу?</h3>
             <ol className="space-y-2 text-gray-300 text-sm list-decimal list-inside">
               <li>
-                <strong className="text-horror-glow">Создайте категории:</strong> Сначала создайте основные разделы каталога (например, "Живые ёлки", "Подставки")
+                <strong className="text-horror-glow">Создайте категории:</strong> Сначала создайте основные разделы каталога (например, &quot;Живые ёлки&quot;, &quot;Подставки&quot;)
               </li>
               <li>
                 <strong className="text-horror-glow">Добавьте товары:</strong> После создания категорий добавьте товары с фотографиями, описаниями и ценами
               </li>
               <li>
-                <strong className="text-horror-glow">Проверьте наличие:</strong> Убедитесь, что у товаров включен переключатель "В наличии", чтобы они отображались на сайте
+                <strong className="text-horror-glow">Проверьте наличие:</strong> Убедитесь, что у товаров включен переключатель &quot;В наличии&quot;, чтобы они отображались на сайте
               </li>
               <li>
                 <strong className="text-horror-glow">Проверьте сайт:</strong> Откройте каталог на сайте, чтобы увидеть, как ваши товары выглядят для покупателей

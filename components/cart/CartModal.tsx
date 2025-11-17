@@ -241,7 +241,7 @@ export function CartModal({ isOpen, onClose }: CartModalProps) {
                 </div>
 
                 <p className="text-xs text-gray-500 text-center">
-                  Нажимая "Оформить заказ", вы соглашаетесь с условиями
+                  Нажимая &quot;Оформить заказ&quot;, вы соглашаетесь с условиями
                 </p>
               </motion.div>
             )}
