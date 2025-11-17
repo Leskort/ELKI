@@ -15,7 +15,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ru" className="scroll-smooth">
-      <body className="scary-bg min-h-screen w-full">
+      <body className="scary-bg min-h-screen w-full overflow-x-hidden">
         <Providers>{children}</Providers>
       </body>
     </html>

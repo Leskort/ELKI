@@ -23,7 +23,7 @@ export default function Home() {
   }, [])
 
   return (
-    <div className="relative min-h-screen w-full">
+    <div className="relative min-h-screen w-full overflow-x-hidden">
       {/* Фоновое видео */}
       <div className="fixed inset-0 z-0">
         {!videoError && (
@@ -55,8 +55,8 @@ export default function Home() {
       <Navbar />
 
       {/* Hero Section */}
-      <main className="relative z-10 pt-20 sm:pt-24">
-        <section className="container mx-auto px-4 py-20 text-center">
+      <main className="relative z-10 pt-20 sm:pt-24 w-full">
+        <section className="container mx-auto px-4 py-20 text-center w-full">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
@@ -147,13 +147,13 @@ export default function Home() {
         </section>
 
         {/* Дополнительная секция */}
-        <section className="container mx-auto px-4 py-12 sm:py-20">
+        <section className="container mx-auto px-4 py-12 sm:py-20 w-full">
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="horror-border p-6 sm:p-12 text-center max-w-4xl mx-auto"
+            className="horror-border p-6 sm:p-12 text-center max-w-4xl mx-auto w-full"
           >
             <h2 className="horror-text text-3xl sm:text-4xl md:text-5xl mb-6 text-horror-glow">
               Почему наши ёлки особенные?

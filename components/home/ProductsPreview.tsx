@@ -121,11 +121,12 @@ export function ProductsPreview() {
 
   if (allProducts.length === 0) {
     return (
-      <div className="text-center py-12">
-        <p className="text-gray-400 mb-4">Товары скоро появятся</p>
+      <div className="text-center py-12 w-full">
+        <p className="text-gray-400 mb-4 text-lg">Товары скоро появятся</p>
+        <p className="text-gray-500 mb-4 text-sm">База данных инициализируется...</p>
         <Link
           href="/catalog"
-          className="inline-block px-6 py-3 bg-horror-red hover:bg-horror-blood horror-text text-lg horror-glow transition-all"
+          className="inline-block px-6 py-3 bg-horror-red hover:bg-horror-blood horror-text text-lg horror-glow transition-all rounded-lg"
         >
           ПЕРЕЙТИ В КАТАЛОГ
         </Link>
