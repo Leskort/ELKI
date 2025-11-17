@@ -44,10 +44,9 @@ NEXTAUTH_SECRET=сгенерируйте-случайную-строку-32-си
 NEXTAUTH_URL=https://ваш-сайт.netlify.app
 ```
 
-**Важно:** Connection string должен включать токен в формате:
-```
-libsql://database-name.turso.io?authToken=ваш-токен
-```
+**Важно:** 
+- Connection string должен включать токен в формате: `libsql://database-name.turso.io?authToken=ваш-токен`
+- Prisma использует провайдер `sqlite`, но Turso connection string работает с ним
 
 ### 6. Выполните миграции
 
