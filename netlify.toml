@@ -5,9 +5,6 @@
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
-[[plugins]]
-  package = "@netlify/plugin-prisma"
-
 [build.environment]
   NODE_VERSION = "18"
 
