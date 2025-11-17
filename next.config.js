@@ -17,10 +17,6 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: false,
   },
-  // Убеждаемся, что CSS компилируется правильно
-  experimental: {
-    optimizeCss: true,
-  },
 }
 
 module.exports = nextConfig
