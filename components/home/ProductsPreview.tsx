@@ -60,10 +60,14 @@ export function ProductsPreview() {
 
   const fetchCategories = async () => {
     try {
-      const res = await fetch('/api/categories')
+      const res = await fetch('/api/categories', {
+        cache: 'no-store',
+      })
       if (res.ok) {
         const data = await res.json()
         setCategories(data)
+      } else {
+        console.error('Failed to fetch categories:', res.status, res.statusText)
       }
     } catch (error) {
       console.error('Error fetching categories:', error)

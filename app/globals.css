@@ -20,9 +20,16 @@ body {
   background: #0a0a0a !important;
   color: #e5e5e5 !important;
   font-family: 'Special Elite', cursive;
-  overflow-x: hidden;
-  min-height: 100vh;
-  width: 100%;
+  overflow-x: hidden !important;
+  min-height: 100vh !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+html {
+  width: 100% !important;
+  overflow-x: hidden !important;
 }
 
 .horror-text {
