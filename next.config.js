@@ -12,7 +12,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   eslint: {
-    // Отключаем строгую проверку ESLint во время сборки (можно исправить позже)
+    // Игнорируем предупреждения во время сборки, но ошибки все равно будут блокировать
     ignoreDuringBuilds: false,
   },
   typescript: {

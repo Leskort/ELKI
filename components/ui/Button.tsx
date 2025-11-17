@@ -36,7 +36,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           sizes[size],
           className
         )}
-        {...props}
+        {...(props as any)}
       >
         {children}
       </motion.button>

@@ -121,7 +121,7 @@ export default function AdminPage() {
                 <div className="flex-1">
                   <h3 className="text-xl mb-2 text-horror-glow font-bold">Категории и разделы</h3>
                   <p className="text-gray-400 text-sm mb-3">
-                    Создавайте и управляйте категориями товаров. Например: "Живые ёлки", "Подставки", "Аксессуары"
+                    Создавайте и управляйте категориями товаров. Например: &quot;Живые ёлки&quot;, &quot;Подставки&quot;, &quot;Аксессуары&quot;
                   </p>
                   <div className="flex items-center gap-2 text-horror-glow text-sm group-hover:gap-3 transition-all">
                     <span>Открыть</span>
