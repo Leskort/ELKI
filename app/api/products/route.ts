@@ -2,10 +2,39 @@ import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { requireAdmin } from '@/lib/auth'
 import { productSchema } from '@/lib/validations/product'
+import { staticProducts } from '@/lib/data/static-data'
+
+// Проверка доступности базы данных
+async function isDatabaseAvailable(): Promise<boolean> {
+  try {
+    await prisma.$queryRaw`SELECT 1`
+    return true
+  } catch {
+    return false
+  }
+}
 
 // GET - получить все товары
 export async function GET(request: NextRequest) {
   try {
+    // Проверяем доступность базы данных
+    const dbAvailable = await isDatabaseAvailable()
+    
+    if (!dbAvailable) {
+      // Используем статические данные
+      const { searchParams } = new URL(request.url)
+      const categoryId = searchParams.get('categoryId')
+      
+      let products = staticProducts
+      
+      if (categoryId) {
+        products = products.filter(p => p.categoryId === categoryId)
+      }
+      
+      return NextResponse.json(products)
+    }
+
+    // Используем базу данных
     const { searchParams } = new URL(request.url)
     const categoryId = searchParams.get('categoryId')
 
@@ -53,10 +82,8 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(productsWithParsedImages)
   } catch (error) {
     console.error('Error fetching products:', error)
-    return NextResponse.json(
-      { error: 'Ошибка при получении товаров' },
-      { status: 500 }
-    )
+    // В случае ошибки возвращаем статические данные
+    return NextResponse.json(staticProducts)
   }
 }
 

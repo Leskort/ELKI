@@ -2,6 +2,17 @@ import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { requireAdmin } from '@/lib/auth'
 import { productSchema } from '@/lib/validations/product'
+import { staticProducts } from '@/lib/data/static-data'
+
+// Проверка доступности базы данных
+async function isDatabaseAvailable(): Promise<boolean> {
+  try {
+    await prisma.$queryRaw`SELECT 1`
+    return true
+  } catch {
+    return false
+  }
+}
 
 // GET - получить товар по ID
 export async function GET(
@@ -9,8 +20,30 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
-    const product = await prisma.product.findUnique({
-      where: { id: params.id },
+    // Проверяем доступность базы данных
+    const dbAvailable = await isDatabaseAvailable()
+    
+    if (!dbAvailable) {
+      // Используем статические данные
+      const product = staticProducts.find(p => p.id === params.id || p.slug === params.id)
+      if (!product) {
+        return NextResponse.json(
+          { error: 'Товар не найден' },
+          { status: 404 }
+        )
+      }
+      return NextResponse.json(product)
+    }
+
+    // Используем базу данных
+    // Пытаемся найти по ID или slug
+    const product = await prisma.product.findFirst({
+      where: {
+        OR: [
+          { id: params.id },
+          { slug: params.id }
+        ]
+      },
       include: {
         category: {
           include: {
@@ -36,6 +69,11 @@ export async function GET(
     return NextResponse.json(productWithParsedImages)
   } catch (error) {
     console.error('Error fetching product:', error)
+    // В случае ошибки пытаемся найти в статических данных
+    const product = staticProducts.find(p => p.id === params.id || p.slug === params.id)
+    if (product) {
+      return NextResponse.json(product)
+    }
     return NextResponse.json(
       { error: 'Ошибка при получении товара' },
       { status: 500 }

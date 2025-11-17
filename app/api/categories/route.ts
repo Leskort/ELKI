@@ -2,10 +2,30 @@ import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { requireAdmin } from '@/lib/auth'
 import { categorySchema } from '@/lib/validations/category'
+import { staticCategories } from '@/lib/data/static-data'
+
+// Проверка доступности базы данных
+async function isDatabaseAvailable(): Promise<boolean> {
+  try {
+    await prisma.$queryRaw`SELECT 1`
+    return true
+  } catch {
+    return false
+  }
+}
 
 // GET - получить все категории
 export async function GET() {
   try {
+    // Проверяем доступность базы данных
+    const dbAvailable = await isDatabaseAvailable()
+    
+    if (!dbAvailable) {
+      // Используем статические данные
+      return NextResponse.json(staticCategories)
+    }
+
+    // Используем базу данных
     const categories = await prisma.category.findMany({
       include: {
         children: true,
@@ -22,10 +42,8 @@ export async function GET() {
     return NextResponse.json(categories)
   } catch (error) {
     console.error('Error fetching categories:', error)
-    return NextResponse.json(
-      { error: 'Ошибка при получении категорий' },
-      { status: 500 }
-    )
+    // В случае ошибки возвращаем статические данные
+    return NextResponse.json(staticCategories)
   }
 }
 
