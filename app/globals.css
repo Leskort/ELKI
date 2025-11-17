@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Creepster&family=Special+Elite&display=swap&subset=cyrillic');
+@import url('https://fonts.googleapis.com/css2?family=Creepster&family=Special+Elite&display=swap');
 
 :root {
   --horror-dark: #0a0a0a;

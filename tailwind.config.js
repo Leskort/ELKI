@@ -4,6 +4,20 @@ module.exports = {
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './lib/**/*.{js,ts,jsx,tsx}',
+    './contexts/**/*.{js,ts,jsx,tsx}',
+  ],
+  safelist: [
+    'text-horror-glow',
+    'bg-horror-dark',
+    'bg-horror-darker',
+    'bg-horror-red',
+    'bg-horror-blood',
+    'border-horror-glow',
+    'horror-text',
+    'horror-glow',
+    'horror-border',
+    'scary-bg',
   ],
   theme: {
     extend: {

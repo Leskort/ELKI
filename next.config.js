@@ -12,12 +12,14 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   eslint: {
-    // Игнорируем предупреждения во время сборки, но ошибки все равно будут блокировать
     ignoreDuringBuilds: false,
   },
   typescript: {
-    // Отключаем проверку типов во время сборки (можно исправить позже)
     ignoreBuildErrors: false,
+  },
+  // Убеждаемся, что CSS компилируется правильно
+  experimental: {
+    optimizeCss: true,
   },
 }
 
