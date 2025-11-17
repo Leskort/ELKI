@@ -77,7 +77,7 @@ export function ProductCard({ product, index = 0, className, ...props }: Product
       transition={{ delay: index * 0.05, duration: 0.4 }}
       whileHover={{ y: -8 }}
       className={cn('group relative h-full flex flex-col', className)}
-      {...props}
+      {...(props as any)}
     >
       <Link 
         href={`/catalog/${product.slug}`}
