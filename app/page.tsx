@@ -23,7 +23,7 @@ export default function Home() {
   }, [])
 
   return (
-    <div className="relative min-h-screen overflow-hidden">
+    <div className="relative min-h-screen">
       {/* Фоновое видео */}
       <div className="fixed inset-0 z-0">
         {!videoError && (
