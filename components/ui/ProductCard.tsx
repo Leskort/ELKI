@@ -2,13 +2,13 @@
 
 import { HTMLAttributes } from 'react'
 import Link from 'next/link'
-import { motion } from 'framer-motion'
+import { motion, MotionProps } from 'framer-motion'
 import { cn } from '@/lib/utils'
 import { formatPrice } from '@/lib/utils/format'
 import { TreePine, ShoppingCart, Plus, Minus } from 'lucide-react'
 import { useCart } from '@/contexts/CartContext'
 
-interface ProductCardProps extends HTMLAttributes<HTMLDivElement> {
+interface ProductCardProps extends Omit<HTMLAttributes<HTMLDivElement>, keyof MotionProps> {
   product: {
     id: string
     name: string
@@ -77,7 +77,7 @@ export function ProductCard({ product, index = 0, className, ...props }: Product
       transition={{ delay: index * 0.05, duration: 0.4 }}
       whileHover={{ y: -8 }}
       className={cn('group relative h-full flex flex-col', className)}
-      {...(props as any)}
+      {...props}
     >
       <Link 
         href={`/catalog/${product.slug}`}
