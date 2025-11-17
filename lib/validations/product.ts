@@ -1,0 +1,15 @@
+import { z } from 'zod'
+
+export const productSchema = z.object({
+  name: z.string().min(1, 'Название обязательно'),
+  slug: z.string().min(1, 'Slug обязателен').regex(/^[a-z0-9-]+$/, 'Slug может содержать только строчные буквы, цифры и дефисы'),
+  description: z.string().optional(),
+  price: z.number().positive('Цена должна быть положительной'),
+  image: z.string().url('Неверный URL изображения').optional().or(z.literal('')),
+  images: z.array(z.string().url()).optional(), // Массив URL изображений (будет преобразован в JSON строку)
+  inStock: z.boolean().default(true),
+  categoryId: z.string().min(1, 'Категория обязательна'),
+})
+
+export type ProductInput = z.infer<typeof productSchema>
+
