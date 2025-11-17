@@ -42,10 +42,14 @@ export function ProductsPreview() {
 
   const fetchProducts = async () => {
     try {
-      const res = await fetch('/api/products')
+      const res = await fetch('/api/products', {
+        cache: 'no-store',
+      })
       if (res.ok) {
         const data = await res.json()
         setAllProducts(data.filter((p: Product) => p.inStock))
+      } else {
+        console.error('Failed to fetch products:', res.status, res.statusText)
       }
     } catch (error) {
       console.error('Error fetching products:', error)

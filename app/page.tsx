@@ -177,8 +177,8 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="relative z-10 horror-border-t mt-20 backdrop-blur-sm bg-horror-dark/30">
-        <div className="container mx-auto px-4 py-8 text-center text-gray-400">
+      <footer className="relative z-10 horror-border-t mt-20 backdrop-blur-sm bg-horror-dark/30 w-full">
+        <div className="container mx-auto px-4 py-8 text-center text-gray-400 w-full">
           <p className="mb-2">© 2024 Ёлки из Тьмы. Все права защищены.</p>
           <p className="text-sm">Цены в белорусских рублях (BYN)</p>
         </div>
